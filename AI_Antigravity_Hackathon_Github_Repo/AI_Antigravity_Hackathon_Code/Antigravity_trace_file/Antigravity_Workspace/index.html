@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServAI AI-Ops Command Center - Service Orchestration</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Urdu:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="theme-standard">
+    <!-- Ambient glowing backgrounds -->
+    <div class="glow-container">
+        <div class="glow-orb primary-glow"></div>
+        <div class="glow-orb secondary-glow"></div>
+    </div>
+
+    <!-- Main Command Header -->
+    <header class="ops-header">
+        <div class="header-left">
+            <div class="pulse-ring"></div>
+            <div class="header-titles">
+                <h1>SERVAI AI-OPS COMMAND</h1>
+                <p>Informal Sector Service Orchestration Core v3.0 // Autonomous Multi-Agent Loop</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="system-status-indicator active" id="system-status-indicator">
+                <span class="indicator-dot"></span>
+                <span class="indicator-label" id="status-label">STATUS: STANDBY</span>
+            </div>
+            <div class="confidence-indicator">
+                <span class="conf-title">AGENT NLU CONFIDENCE:</span>
+                <span class="conf-value" id="system-confidence">--%</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Grid Workspace -->
+    <main class="ops-container">
+
+        <!-- MODULE 1: CONSUMER DEVICE MOCKUP (LEFT) -->
+        <section class="panel phone-module">
+            <div class="phone-mockup">
+                <div class="phone-speaker"></div>
+                <div class="phone-screen">
+                    <div class="app-statusBar">
+                        <span>ServAI Pay</span>
+                        <span>21:04</span>
+                    </div>
+                    <div class="app-inner">
+                        <div class="app-header-home">
+                            <span class="avatar">👤</span>
+                            <div class="app-brand">
+                                <h2>ServAI</h2>
+                                <p>AI Marketplace Hub</p>
+                            </div>
+                        </div>
+
+                        <!-- Chat & Input Screen -->
+                        <div class="phone-content scrollable">
+                            <div class="presets-container">
+                                <span class="label-header">STANDARD REQUEST PRESETS</span>
+                                <div class="presets-scroller">
+                                    <button class="phone-preset-btn" data-query="Mujhe kal DHA mein plumber chahiye">
+                                        <span class="lang-badge roman">Roman Urdu</span>
+                                        <p>"Mujhe kal DHA mein plumber chahiye"</p>
+                                    </button>
+                                    <button class="phone-preset-btn"
+                                        data-query="Need electrician in Clifton Karachi tomorrow afternoon">
+                                        <span class="lang-badge en">English</span>
+                                        <p>"Need electrician in Clifton Karachi tomorrow..."</p>
+                                    </button>
+                                    <button class="phone-preset-btn"
+                                        data-query="مجھے کل جی-13 اسلام آباد میں اے سی ٹیکنیشن کی ضرورت ہے">
+                                        <span class="lang-badge ur">Urdu (اردو)</span>
+                                        <p>"مجھے کل جی-13 اسلام آباد میں اے سی ٹیکنیشن کی..."</p>
+                                    </button>
+                                </div>
+
+                                <span class="label-header emergency-heading">⚠️ EMERGENCY ESCALATION TRIGGERS</span>
+                                <div class="presets-scroller">
+                                    <button class="phone-preset-btn emergency-btn"
+                                        data-query="Urgent plumber! DHA Karachi me paani leak ho rha h wiring k pas, shock lag skta h">
+                                        <span class="lang-badge emergency">URGENT PLUMBING SHOCK</span>
+                                        <p>"Urgent! DHA Karachi me paani leak ho rha h..."</p>
+                                    </button>
+                                    <button class="phone-preset-btn emergency-btn"
+                                        data-query="EMERGENCY! Clifton me main electrical box spark kr rha he immediate bijliwala bhejo!">
+                                        <span class="lang-badge emergency">SPARKING MAIN LINE</span>
+                                        <p>"Clifton me main electrical box spark kr rha..."</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="phone-chat-input-area">
+                                <textarea id="chat-input"
+                                    placeholder="Describe service need (English, Urdu, or Roman Urdu)..."></textarea>
+                                <div class="phone-chat-footer">
+                                    <button id="phone-clear-btn" class="phone-action-btn sec">Clear</button>
+                                    <button id="phone-submit-btn" class="phone-action-btn prim">Send Request</button>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Ticket / ETA Screen on Phone -->
+                            <div class="phone-tracking-card hidden" id="phone-ticket-card">
+                                <div class="tracking-top">
+                                    <span class="track-title">BOOKING DETAILS</span>
+                                    <span class="track-booking-id" id="phone-booking-id">BK-102</span>
+                                </div>
+                                <div class="tracking-body">
+                                    <div class="track-provider" id="phone-provider-name">Ali Plumbing Services</div>
+                                    <div class="track-eta" id="phone-eta-counter">ETA: 4 mins 32 secs</div>
+                                    <div class="track-progress-bar">
+                                        <div class="track-progress-fill" id="phone-progress-fill"></div>
+                                    </div>
+                                    <div class="track-status" id="phone-status-text">Technician En Route</div>
+                                </div>
+                                <div class="tracking-actions">
+                                    <button class="track-btn chat">💬 Chat</button>
+                                    <button class="track-btn cancel">❌ Cancel</button>
+                                </div>
+                            </div>
+
+                            <!-- Rating Screen on Phone -->
+                            <div class="phone-rating-card hidden" id="phone-rating-card">
+                                <div class="rating-top">
+                                    <span>🎉 SERVICE COMPLETED</span>
+                                </div>
+                                <div class="rating-body">
+                                    <p>Please rate your provider experience to help index their quality score:</p>
+                                    <div class="rating-stars" id="interactive-stars">
+                                        <span class="star-btn" data-value="1">★</span>
+                                        <span class="star-btn" data-value="2">★</span>
+                                        <span class="star-btn" data-value="3">★</span>
+                                        <span class="star-btn" data-value="4">★</span>
+                                        <span class="star-btn" data-value="5">★</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2: AGENT NETWORK MATRIX & RADAR OPS (MIDDLE & RIGHT) -->
+        <section class="ops-main-panel">
+
+            <!-- UPPER HALF: MAP & MULTI-AGENT STATE GRID -->
+            <div class="ops-top-grid">
+
+                <!-- Uber/Careem Tracking Map Canvas -->
+                <div class="panel map-module">
+                    <div class="panel-header-ops">
+                        <span class="header-icon">🗺️</span>
+                        <h3>SPATIAL ROUTING ENGINE (UBER-TRACK SIMULATION)</h3>
+                        <span class="map-stats" id="map-stats-eta">ETA: -- | DIST: --</span>
+                    </div>
+                    <div class="map-container">
+                        <canvas id="ops-map"></canvas>
+                        <div class="map-grid-overlay"></div>
+                        <div class="map-compass-hud">
+                            <span class="hud-comp">N</span>
+                            <span class="hud-scale">SCALE: 1:15,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 Intelligent Agents Connected Node Net -->
+                <div class="panel agents-module">
+                    <div class="panel-header-ops">
+                        <span class="header-icon">🤖</span>
+                        <h3>INTELLIGENT MULTI-AGENT ORCHESTRATION LAYER</h3>
+                    </div>
+                    <div class="agents-grid">
+
+                        <!-- Agent 1 -->
+                        <div class="agent-node-card" id="agent-intent">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>1. Intent Agent</h4>
+                            </div>
+                            <p class="agent-node-status">STDBY</p>
+                            <div class="agent-thought">Ready to parse syntax...</div>
+                        </div>
+
+                        <!-- Agent 2 -->
+                        <div class="agent-node-card" id="agent-discovery">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>2. Discovery Agent</h4>
+                            </div>
+                            <p class="agent-node-status">STDBY</p>
+                            <div class="agent-thought">Scanning geographic boundaries...</div>
+                        </div>
+
+                        <!-- Agent 3 -->
+                        <div class="agent-node-card" id="agent-ranking">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>3. Ranking Agent</h4>
+                            </div>
+                            <p class="agent-node-status">STDBY</p>
+                            <div class="agent-thought">Ready to weight scores...</div>
+                        </div>
+
+                        <!-- Agent 4 -->
+                        <div class="agent-node-card" id="agent-booking">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>4. Booking Agent</h4>
+                            </div>
+                            <p class="agent-node-status">STDBY</p>
+                            <div class="agent-thought">Awaiting lock reservation...</div>
+                        </div>
+
+                        <!-- Agent 5 -->
+                        <div class="agent-node-card" id="agent-followup">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>5. Follow-Up Agent</h4>
+                            </div>
+                            <p class="agent-node-status">STDBY</p>
+                            <div class="agent-thought">Ready to dispatch status events...</div>
+                        </div>
+
+                        <!-- Agent 6: EMERGENCY ESCALATION -->
+                        <div class="agent-node-card emergency" id="agent-emergency">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>6. Emergency Escalation</h4>
+                            </div>
+                            <p class="agent-node-status">MONITORING</p>
+                            <div class="agent-thought">Evaluating pipeline threat index...</div>
+                        </div>
+
+                        <!-- Agent 7: LOGGING CORE -->
+                        <div class="agent-node-card logging" id="agent-logging">
+                            <div class="agent-node-header">
+                                <span class="agent-status-pulse"></span>
+                                <h4>7. Logging Agent</h4>
+                            </div>
+                            <p class="agent-node-status">LOGGING</p>
+                            <div class="agent-thought">Aggregating transactional trace...</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MIDDLE GRID: PROVIDER SCORING & PIPELINE STEPPER -->
+            <div class="ops-middle-grid">
+
+                <!-- Provider Ranking Comparison Dynamic Matrix -->
+                <div class="panel ranking-matrix-module">
+                    <div class="panel-header-ops">
+                        <span class="header-icon">📈</span>
+                        <h3>MULTI-CRITERIA COMPARATIVE SCOREBOARD</h3>
+                    </div>
+                    <div class="ranking-matrix-container">
+                        <table class="ops-ranking-table" id="ops-ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Provider Service</th>
+                                    <th>Rating (40%)</th>
+                                    <th>Distance (40%)</th>
+                                    <th>Speed (10%)</th>
+                                    <th>Avail (10%)</th>
+                                    <th>Score / Match Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ops-ranking-tbody">
+                                <tr>
+                                    <td colspan="7" class="empty-table-msg">Awaiting orchestrator run to evaluate
+                                        provider database...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vertical Booking Progress Timeline Stepper -->
+                <div class="panel timeline-module">
+                    <div class="panel-header-ops">
+                        <span class="header-icon">⏳</span>
+                        <h3>WORKFLOW PIPELINE TRACKER</h3>
+                    </div>
+                    <div class="timeline-stepper">
+                        <div class="timeline-step-ops" id="t-received">
+                            <div class="step-ops-bullet"></div>
+                            <span>Request Received</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-discovery">
+                            <div class="step-ops-bullet"></div>
+                            <span>Provider Discovery</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-ranking">
+                            <div class="step-ops-bullet"></div>
+                            <span>Provider Ranking</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-booking">
+                            <div class="step-ops-bullet"></div>
+                            <span>Booking Confirmed</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-assigned">
+                            <div class="step-ops-bullet"></div>
+                            <span>Provider Assigned</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-enroute">
+                            <div class="step-ops-bullet"></div>
+                            <span>Technician En Route</span>
+                        </div>
+                        <div class="timeline-step-ops" id="t-completed">
+                            <div class="step-ops-bullet"></div>
+                            <span>Service Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BOTTOM PANEL: System OS Logs & Trace -->
+            <div class="panel log-ops-module">
+                <div class="panel-header-ops">
+                    <div class="panel-header-left">
+                        <span class="header-icon">💻</span>
+                        <h3>OPERATIONAL AUDIT TRAIL // REAL-TIME EVENT STREAM</h3>
+                    </div>
+                    <div class="panel-header-actions">
+                        <button class="ops-btn" id="ops-copy-btn">Copy Trace</button>
+                        <button class="ops-btn" id="ops-clear-btn">Flush Log Buffer</button>
+                    </div>
+                </div>
+                <div class="log-stream-wrapper">
+                    <div class="log-stream-terminal" id="ops-terminal">
+                        <div class="ops-log system">SERVAI CORE OS // BOOT OK. Multi-agent environment ready.</div>
+                        <div class="ops-log system">Awaiting user conversational intent pipeline triggers...</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Overlay emergency alert screen -->
+    <div class="emergency-overlay hidden" id="emergency-alert-screener">
+        <div class="emergency-alert-card">
+            <div class="alert-icon">⚠️</div>
+            <h2>EMERGENCY COLLOCUTORY SHIFT</h2>
+            <p>An emergency threat signature has been detected by the Emergency Escalation Agent. Transitioning entire
+                orchestration system to high-priority fast-track operations.</p>
+            <div class="bar-progress-alert">
+                <div class="bar-progress-alert-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="orchestrator.js"></script>
+</body>
+
+</html>
