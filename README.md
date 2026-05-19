@@ -228,7 +228,7 @@ Reminder scheduled 1 hour before appointment
 
 # System Architecture
 
-<img width="1440" height="2610" alt="image" src="https://github.com/user-attachments/assets/b3449895-774b-4480-a99b-922f5b5c79b8" />
+<img width="1440" height="2160" alt="architecture" src="https://github.com/user-attachments/assets/cc6760b5-0f11-41de-b03f-b6860505d623" />
 
 
 ```
